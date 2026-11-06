@@ -430,8 +430,6 @@
     .selo-garantia { width: 180px; }
     .selo-garantia b { font-size: 80px; }
     .cartao-oferta { order: -1; }
-    .barra { display: flex; }
-    footer { padding-bottom: 110px; }
   }
   @media (max-width: 460px) {
     .pilares { grid-template-columns: 1fr; }
@@ -448,19 +446,8 @@
   }
 </style>
 
-<!-- CONTADOR ATÉ O FIM DA OFERTA + HEADER -->
+<!-- HEADER (sem contador: pedido do Richer, 05/11) -->
 <div class="topo-fixo">
-  <div class="contador">
-    <div class="wrap">
-      <span id="contador-txt"><span class="txt-longo">A oferta de Black termina em 11/11, às 23h59</span><span class="txt-curto">Black termina em</span></span>
-      <div class="relogio" id="relogio" aria-label="Tempo até o fim da oferta">
-        <span><b id="cd-d">--</b><small>d</small></span>
-        <span><b id="cd-h">--</b><small>h</small></span>
-        <span><b id="cd-m">--</b><small>m</small></span>
-        <span><b id="cd-s">--</b><small>s</small></span>
-      </div>
-    </div>
-  </div>
   <!-- 1. HEADER -->
   <nav class="header" aria-label="Menu">
     <div class="wrap">
@@ -471,7 +458,6 @@
         <a href="#oferta">Oferta</a>
         <a href="#duvidas">Dúvidas</a>
       </div>
-      <a class="btn-mini js-checkout" href="#oferta">Quero a oferta</a>
     </div>
   </nav>
 </div>
@@ -483,14 +469,6 @@
       <span class="selo"><i></i>Oferta de Black revelada</span>
       <h1>A <span class="faixa"><b>Black</b></span> do treinador que quer <span class="am">viver da corrida</span></h1>
       <p class="sub"><span class="sub-longo">O <strong>Clube dos Mestres da Corrida</strong> e o <strong>App Evolution RUN</strong>, os dois por 1 ano, pelo preço do Clube. Condição exclusiva de Black, só até 11/11.</span><span class="sub-curto"><strong>Clube dos Mestres da Corrida + App Evolution RUN</strong> por 1 ano, pelo preço do Clube.</span></p>
-      <div class="preco-hero">
-        <span class="de">De <s>R$ 3.000</s> por</span>
-        <span class="por"><small>R$</small>2.000</span>
-        <span class="cond">à vista ou em até 12x no cartão</span>
-      </div>
-      <a class="btn js-checkout" href="#oferta">Quero entrar na Black
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
       <div class="garantias">
         <div class="garantia">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>
@@ -813,11 +791,6 @@
   </div>
 </footer>
 
-<!-- barra fixa (celular) -->
-<div class="barra" id="barra">
-  <div class="barra-preco"><small>De <s>R$ 3.000</s></small><b>R$ 2.000</b></div>
-  <a class="btn js-checkout" href="#oferta">Quero a oferta</a>
-</div>
 
 <script>
   /* ====== CONFIG: conferir antes de publicar ====== */
@@ -840,27 +813,6 @@
     });
   })();
 
-  // Contador até o fim da oferta
-  (function () {
-    const alvo = new Date(CONFIG.fimOferta).getTime();
-    const el = { d: "cd-d", h: "cd-h", m: "cd-m", s: "cd-s" };
-    for (const k in el) el[k] = document.getElementById(el[k]);
-    const dois = n => String(n).padStart(2, "0");
-    function tic() {
-      const r = alvo - Date.now();
-      if (r <= 0) {
-        document.getElementById("contador-txt").textContent = "A oferta de Black foi encerrada.";
-        document.getElementById("relogio").hidden = true;
-        return;
-      }
-      el.d.textContent = Math.floor(r / 864e5);
-      el.h.textContent = dois(Math.floor(r / 36e5) % 24);
-      el.m.textContent = dois(Math.floor(r / 6e4) % 60);
-      el.s.textContent = dois(Math.floor(r / 1e3) % 60);
-      setTimeout(tic, 1000);
-    }
-    tic();
-  })();
 
   // Depoimentos: o vídeo do YouTube só carrega quando a pessoa toca na capa
   (function () {
@@ -881,14 +833,4 @@
     });
   })();
 
-  // Barra fixa: aparece depois que o botão do topo sai da tela e some na seção da oferta
-  (function () {
-    const barra = document.getElementById("barra");
-    const heroBtn = document.querySelector(".hero .btn");
-    const oferta = document.getElementById("oferta");
-    let passouHero = false, naOferta = false;
-    const atualizar = () => barra.classList.toggle("ver", passouHero && !naOferta);
-    new IntersectionObserver(function (e) { passouHero = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; atualizar(); }).observe(heroBtn);
-    new IntersectionObserver(function (e) { naOferta = e[0].isIntersecting; atualizar(); }, { threshold: .25 }).observe(oferta);
-  })();
 </script>

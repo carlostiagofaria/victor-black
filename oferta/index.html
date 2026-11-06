@@ -303,6 +303,8 @@
   .tabela th.na-black, .tabela td.na-black { background: rgba(255,200,0,.1); color: var(--amarelo); font-weight: 700; text-align: center; }
   .tabela th.fora, .tabela td.fora { text-align: center; color: var(--texto-2); white-space: nowrap; }
   .tabela td small { display: block; color: var(--texto-2); font-size: 12.5px; }
+  .tabela tr.curso td:first-child { padding-left: 28px; position: relative; }
+  .tabela tr.curso td:first-child::before { content: ""; position: absolute; left: 14px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: var(--amarelo); }
   .tabela tfoot td { font-weight: 800; border-bottom: 0; font-size: 16px; }
   .tabela tfoot td.fora s { color: var(--riscado); }
   .tabela tfoot td.na-black { font: 900 italic 26px/1 var(--f-titulo); white-space: nowrap; }
@@ -716,8 +718,12 @@
           </thead>
           <tbody>
             <tr><td>Clube dos Mestres da Corrida<small>1 ano de acesso</small></td><td class="fora">R$ 2.000</td><td class="na-black">Incluso</td></tr>
-            <tr><td>App Evolution RUN<small>1 ano, alunos ilimitados</small></td><td class="fora">R$ 1.000</td><td class="na-black">Incluso</td></tr>
+            <tr class="curso"><td>Express Run EVOLUTION<small>curso que vem com o Clube</small></td><td class="fora">já vem no Clube</td><td class="na-black">Incluso</td></tr>
+            <tr class="curso"><td>Mestre da Força na Corrida<small>curso que vem com o Clube</small></td><td class="fora">já vem no Clube</td><td class="na-black">Incluso</td></tr>
+            <tr class="curso"><td>Marketing Digital para Treinadores de Corrida<small>curso que vem com o Clube</small></td><td class="fora">já vem no Clube</td><td class="na-black">Incluso</td></tr>
+            <tr class="curso"><td>Instagram Campeão<small>curso que vem com o Clube</small></td><td class="fora">já vem no Clube</td><td class="na-black">Incluso</td></tr>
             <tr><td>Encontros ao vivo + Rede Nós de Mestres<small>durante 1 ano</small></td><td class="fora">já vem no Clube</td><td class="na-black">Incluso</td></tr>
+            <tr><td>App Evolution RUN<small>1 ano, alunos ilimitados</small></td><td class="fora">R$ 1.000</td><td class="na-black">Incluso</td></tr>
           </tbody>
           <tfoot>
             <tr><td>Total</td><td class="fora"><s>R$ 3.000</s></td><td class="na-black">R$ 2.000</td></tr>
